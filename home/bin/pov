@@ -1,0 +1,76 @@
+#! /bin/bash
+# @file: pov
+# @version: 2019-04-30
+# @created: 2019-04-29
+# @author: pyramid
+# @brief: script to run povray on android
+# @param: $1 - scene file .pov
+
+
+#====================================
+# INSTRUCTION
+#====================================
+
+# edit ~/bin/cfg/povray.cfg
+# run this file with params
+# pov scene.pov
+
+#====================================
+# CONFIG
+#====================================
+
+# source the config file
+. ~/bin/cfg/povray.cfg
+
+
+#====================================
+# MAIN
+#====================================
+
+
+#------------------------------------
+echo "-------------------------------"
+echo "-- povray android 2019-04-29 --"
+echo "--------------------------:----"
+#------------------------------------
+
+# sample param from input parameter
+#if [ "$1" != "" ] ; then
+#    param=$1
+#fi
+
+#if [ $xdim = "" ] ; then
+#  xdim=300
+#fi
+
+povray +Fn +W$xdim +H$ydim +I$1 +O$outdir/$1.png +L$povinc
+am start --user 0 -a android.intent.action.VIEW -d file:$outdir/$1.png -t image/png
+
+
+#====================================
+# ORIGINAL
+#====================================
+
+# pov original
+#povray +Fn +W$2 +H$3 +I$1.pov +O/sdcard/$1.png +L/sdcard/povlib/include
+#am start --user 0 -a android.intent.action.VIEW -d file:/sdcard/$1.png -t image/png
+
+# pov2png original
+#echo pov2png mypov.pov x y mypov.png
+#povray +Fn +W$2 +H$3 +I$1 +O$4 +L/sdcard/povlib/include
+#am start --user 0 -a android.intent.action.VIEW -d file:/sdcard/$1.png -t image/png
+
+# pov_old original
+#povray +Fn +W1200 +H900 +I$1.pov +O/sdcard/$1.png +L/sdcard/povlib/include &>/dev/null
+#am start -a android.intent.action.VIEW -d file:/sdcard/$1.png -t image/png
+
+# pove original
+#povray +Fn +W$2 +H$3 +I$1.pov +O/sdcard/$1.png +L/sdcard/povlib/include
+#am start --user 0 -a android.intent.action.VIEW -d file:/sdcard/$1.png -t image/png
+
+
+#====================================
+# EOF
+#====================================
+
+
